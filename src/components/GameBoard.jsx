@@ -5,7 +5,7 @@ import dogIcon from '../../public/dog64px.png';
 import dogCone from '../../public/dogCone64px.png';
 import catIcon from '../../public/cat64px.png';
 import catCone from '../../public/catCone64px.png';
-import './GameBoard.css';
+
 
 const GameBoard = ({ catPosition, obstacles, playerIcon, handleLaneClick, infoCoins, isHurt }) => {
   const getPlayerIcon = () => {

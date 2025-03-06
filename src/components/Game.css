@@ -3,15 +3,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  height: 80vh;
-  width: 100vw;
+  height: 60vh;
+  width: 90vw;
   max-width: 100%;
   margin: 0 auto;
-  background: linear-gradient(145deg, #f3f3f3, #e6e6e6);
-  border: none;
-  border-radius: 20px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2), 
-              0 4px 8px rgba(0, 0, 0, 0.1);
+
   padding-top: 50px;
   padding-bottom: 150px;
   overflow: hidden;
@@ -23,88 +19,98 @@
   position: absolute;
   top: 1px;
 }
-  
-  .pawcoin-container {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
-    transform: translateY(-20px)
-  }
 
-  .shields-container {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-
-  .fact-container {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90vw;
-    max-width: 500px;
-    padding: 25px 25px;
-    color: black;
-    font-size: 1.2rem;
-    text-align: center;
-    border-radius: 8px;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-    z-index: 1000;
+.player-icon {
+  z-index: 2;
 }
 
-  
-  .fact-container.show {
-    opacity: 1;
-    visibility: visible;
-  }
-  
-  
-  p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-  }
-  
-  .road {
-    display: flex;
-    justify-content: space-between;
-    width: 340px;
-    height: 70vh;
-    transform: translateY(-20px);
-    border: 2px solid black;
-    background-color: #ddd;
-    position: relative;
-  }
-  
-  .lane {
-    width: 33.33%;
-    height: 100%;
-    border-left: 1px dashed #aaa;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-  }
-  
-  .lane:first-child {
-    border-left: none;
-  }
+.pawcoin-container {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+  transform: translateY(-20px)
+}
 
-  .controls {
-    margin-top: 20px;
-    display: flex;
-    gap: 10px;
+.shields-container {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.fact-container {
+  background-color: rgba(34, 34, 34, 0.8);
+  width: 60vw;
+  padding: 10px;
+  color: #f3f3f3;
+  border-radius: 5px;
+  position: absolute;
+  top: 20%;
+  font-size: 1.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 600px) {
+  .fact-container {
+    font-size: 0.8rem;
+    padding: 5px;
+    top: 25%;
+
   }
-  
-  .controls button {
-    padding: 8px 16px;
-    font-size: 0.9rem;
-    cursor: pointer;
-    border: none;
-    background-color: #4caf50;
-    color: white;
-    border-radius: 5px;
-  }
-  
-  .controls button:hover {
-    background-color: #45a049;
-  }
+}
+
+
+.fact-container.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.road {
+  display: flex;
+  justify-content: space-between;
+  width: 75vw;
+  height: 60vh;
+  transform: translateY(-20px);
+  border: 2px solid black;
+  background-color: #bbb;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #555 0%, #222 100%);
+  border-radius: 12px;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.lane {
+  flex: 1;
+  border-left: 3px dashed #bbb;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 1;
+}
+
+
+.lane:first-child {
+  border-left: none;
+}
+
+.lane::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: repeating-linear-gradient(transparent,
+      transparent 20px,
+      white 20px,
+      white 40px);
+  transform: translateX(-50%);
+  opacity: 0.5;
+}

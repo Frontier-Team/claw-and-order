@@ -11,6 +11,7 @@ import GoldShield from '../../public/goldShield64px.png';
 import './Game.css';
 import { GameContext } from '../App';
 import { FinalPage } from '../Pages/FinalPage';
+import Header from '../Header';
 
 const facts = [
   'Did you know....the average claim for a dog is £826 and for a cat is £702?',
@@ -174,32 +175,30 @@ const Game = () => {
 
   if (!showPopup && !showWinPopup) {
     return (
-      <div className="game-container">
-        <Typography
-          component="span"
-          style={{ marginLeft: '8px', display: 'inline-block', transform: 'translateY(-30px)' }}
-        >
-          Purrfect Pawtection
-        </Typography>
+      <>
+        <Header isInitialPage={false} />
+        <div className="game-container">
 
-        <span className="pawcoin-container">
-          <img src={PawCoin} alt="PawCoin" className="pawcoin" />
-          {score}
 
-          {context.gameState.coverLevel !== 'none' && (
-            <>
-              <img src={shieldImage} alt="Shield" className="shield" />
-              {shields}
-            </>
-          )}
-        </span>
-        <div className="gameboard">
-          <GameBoard catPosition={catPosition} obstacles={obstacles} playerIcon={playerIcon} handleLaneClick={handleLaneClick} infoCoins={infoCoins} isHurt={isHurt} />
+          <span className="pawcoin-container">
+            <img src={PawCoin} alt="PawCoin" className="pawcoin" />
+            {score}
+
+            {context.gameState.coverLevel !== 'none' && (
+              <>
+                <img src={shieldImage} alt="Shield" className="shield" />
+                {shields}
+              </>
+            )}
+          </span>
+          <div className="gameboard">
+            <GameBoard catPosition={catPosition} obstacles={obstacles} playerIcon={playerIcon} handleLaneClick={handleLaneClick} infoCoins={infoCoins} isHurt={isHurt} />
+          </div>
+          {showFact && <div className={`fact-container ${showFact ? 'show' : ''}`}>{currentFact}</div>}
+          {showPopup && <Popup score={score} onRestart={handleRestart} />}
+          {showWinPopup && <WinPopup />}
         </div>
-        {showFact && <div className={`fact-container ${showFact ? 'show' : ''}`}>{currentFact}</div>}
-        {showPopup && <Popup score={score} onRestart={handleRestart} />}
-        {showWinPopup && <WinPopup />}
-      </div>
+      </>
     );
   } else if (showPopup) {
     return (
