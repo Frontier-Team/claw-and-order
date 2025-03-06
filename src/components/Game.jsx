@@ -4,16 +4,20 @@ import GameBoard from './GameBoard';
 import Typography from '@mui/material/Typography';
 import Popup from './Popup';
 import WinPopup from './WinPopup';
-import PawCoin from '../../public/Pawcoin64.png'
-import BronzeShield from '../../public/bronzeshield64px.png'
-import SilverShield from '../../public/silverShield64px.png'
-import GoldShield from '../../public/goldShield64px.png'
+import PawCoin from '../../public/Pawcoin64.png';
+import BronzeShield from '../../public/bronzeshield64px.png';
+import SilverShield from '../../public/silverShield64px.png';
+import GoldShield from '../../public/goldShield64px.png';
 import './Game.css';
 import { GameContext } from '../App';
 import { FinalPage } from '../Pages/FinalPage';
-import Header from '../Header';
 
-const facts = ['Did you know....the average claim for a dog is £826 and for a cat is £702?', 'Did you know... we offer free 24/7 vet advice through video call through each of our insurance plans?', 'Did you know... the average vet bill for a range of common incidents have risen anywhere from 70% to 105% over the past 4 years alone?', "Did you know... we pay claims directly to your vet; you won't need to pay yourself and wait for reimbursement."];
+const facts = [
+  'Did you know....the average claim for a dog is £826 and for a cat is £702?',
+  'Did you know... we offer free 24/7 vet advice through video call through each of our insurance plans?',
+  'Did you know... the average vet bill for a range of common incidents have risen anywhere from 70% to 105% over the past 4 years alone?',
+  "Did you know... we pay claims directly to your vet; you won't need to pay yourself and wait for reimbursement."
+];
 
 const Game = () => {
   const context = useContext(GameContext);
@@ -25,24 +29,21 @@ const Game = () => {
   const [gameOver, setGameOver] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [shields, setShields] = useState(() => context.gameState.coverLevel === 'bronze' ? 3000 : context.gameState.coverLevel === 'silver' ? 6000 : context.gameState.coverLevel === 'gold' ? 12000 : 0);
-  const [playerIcon, setPlayerIcon] = useState(context.gameState.iconType === 'dog' ? '🐶' : '🐱');
+  const [playerIcon, setPlayerIcon] = useState(context.gameState.iconType === 'dog' ? 'dog' : 'cat');
   const [invincible, setInvincible] = useState(false);
   const [coinInvincible, setCoinInvincible] = useState(false);
   const [speed, setSpeed] = useState(1000);
   const [showWinPopup, setShowWinPopup] = useState(false);
   const [infoCoins, setInfoCoins] = useState([]);
-  const [isHurt, setIsHurt] = useState(false)
+  const [isHurt, setIsHurt] = useState(false);
   const [showFact, setShowFact] = useState(false);
   const [currentFact, setCurrentFact] = useState(null);
   const [lastCoinTime, setLastCoinTime] = useState(0);
   const shieldImage = context.gameState.coverLevel === 'bronze' ? BronzeShield : context.gameState.coverLevel === 'silver' ? SilverShield : context.gameState.coverLevel === 'gold' ? GoldShield : 0;
 
   useEffect(() => {
-    console.log(context)
-    setPlayerIcon(context.gameState.iconType === 'dog' ? '🐶' : '🐱');
-  }, [context.iconType]);
-
-
+    setPlayerIcon(context.gameState.iconType === 'dog' ? 'dog' : 'cat');
+  }, [context.gameState.iconType]);
 
   useEffect(() => {
     if (gameOver || showWinPopup) return;
@@ -61,7 +62,6 @@ const Game = () => {
           ? { lane: lane, y: 0, iconIndex: null, isInfoCoin: true }
           : { lane: lane, y: 0, iconIndex: Math.floor(Math.random() * obstacleIcons.length) };
 
-
         if (isInfoCoin) {
           setInfoCoins((prevCoins) => [...prevCoins, newObstacle]);
           return obs;
@@ -69,9 +69,8 @@ const Game = () => {
           return [
             ...obs.filter((ob) => ob.y < 6),
             newObstacle,
-          ]
+          ];
         }
-
       });
       setSpeed((prevSpeed) => Math.max(500, prevSpeed - 20));
     }, speed);
@@ -90,12 +89,11 @@ const Game = () => {
 
       setInfoCoins((coins) =>
         coins.map((coin) => ({ ...coin, y: coin.y + 1 })).filter((coin) => coin.y < 6)
-      )
+      );
     }, Math.max(200, speed / 2));
 
     return () => clearInterval(interval);
   }, [obstacles, gameOver, speed, showWinPopup]);
-
 
   useEffect(() => {
     if (!invincible && obstacles.some((ob) => ob.y === 5 && ob.lane === catPosition)) {
@@ -159,9 +157,10 @@ const Game = () => {
 
   const handleRestart = () => {
     setCatPosition(1);
+    setPlayerIcon(context.gameState.iconType === 'dog' ? 'dog' : 'cat');
     setObstacles([]);
     setScore(0);
-    setShields(initialLives);
+    setShields(() => context.gameState.coverLevel === 'bronze' ? 3000 : context.gameState.coverLevel === 'silver' ? 6000 : context.gameState.coverLevel === 'gold' ? 12000 : 0);
     setGameOver(false);
     setShowPopup(false);
     setInvincible(false);
@@ -204,13 +203,12 @@ const Game = () => {
     );
   } else if (showPopup) {
     return (
-
       <FinalPage result={'lose'} />
-    )
+    );
   } else if (showWinPopup) {
     return (
       <FinalPage result={'win'} />
-    )
+    );
   }
 };
 

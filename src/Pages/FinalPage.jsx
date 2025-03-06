@@ -1,5 +1,5 @@
 import React from 'react';
-import Footer from '../Footer';
+
 import Header from '../Header';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';

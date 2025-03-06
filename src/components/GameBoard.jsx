@@ -1,21 +1,19 @@
 import React from 'react';
-import { GiCat } from 'react-icons/gi';
-import { FaDog } from 'react-icons/fa';
-import dogIcon from '../../public/dog64px.png'
-import dogCone from '../../public/dogCone64px.png'
-import catIcon from '../../public/cat64px.png'
-import catCone from '../../public/catCone64px.png'
 import Obstacles from './Obstacles';
 import InfoCoin from './InfoCoin';
+import dogIcon from '../../public/dog64px.png';
+import dogCone from '../../public/dogCone64px.png';
+import catIcon from '../../public/cat64px.png';
+import catCone from '../../public/catCone64px.png';
 import './GameBoard.css';
 
 const GameBoard = ({ catPosition, obstacles, playerIcon, handleLaneClick, infoCoins, isHurt }) => {
   const getPlayerIcon = () => {
     return (
-      <img 
-        src={playerIcon === '🐶' ? isHurt ? dogCone : dogIcon : isHurt ? catCone : catIcon} 
-        alt={playerIcon === '🐶' ? 'Dog' : 'Cat'} 
-        className="player-icon" 
+      <img
+        src={playerIcon === 'dog' ? (isHurt ? dogCone : dogIcon) : (isHurt ? catCone : catIcon)}
+        alt={playerIcon === 'dog' ? 'Dog' : 'Cat'}
+        className="player-icon"
       />
     );
   };

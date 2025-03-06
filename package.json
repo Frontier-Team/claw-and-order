@@ -11,7 +11,7 @@
     "predeploy": "npm run build",
 "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://gjdteamone.github.io/claw-and-order",
+  "homepage": "https://Frontier-Team.github.io/claw-and-order",
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",

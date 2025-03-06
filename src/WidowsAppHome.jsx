@@ -1,19 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import Header from './Header.jsx';
-import Typography from '@mui/material/Typography';
-import Footer from './Footer.jsx';
 import Box from '@mui/material/Box';
-import SsidChartIcon from '@mui/icons-material/SsidChart';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import Slider from '@mui/material/Slider';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
+import Typography from '@mui/material/Typography';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GameContext } from './App';
+import Header from './Header.jsx';
 
 function WidowsAppHome() {
     const [open, setOpen] = useState(false);
@@ -21,8 +17,8 @@ function WidowsAppHome() {
     const { gameState, updateGameState } = useContext(GameContext);
 
     useEffect(() => {
-        const timer = setTimeout(() => setOpen(true), 6000);
-        return () => clearTimeout(timer); // Clean up if component unmounts
+        const timer = setTimeout(() => setOpen(true), 3000);
+        return () => clearTimeout(timer);
     }, []);
 
     const handleClose = (animal) => {
@@ -50,39 +46,12 @@ function WidowsAppHome() {
                         flexDirection="column"
                         textAlign="center"
                     >
-                        <img
-                            src='./widows-logo.svg'
-                            alt="Widows logo"
-                            style={{ width: '20%', maxWidth: '90px', height: 'auto' }}
-                        />
 
                         <Typography variant="body1" style={{ marginTop: '32px', fontWeight: 'bold' }}>
-                            Total value
-                        </Typography>
-                        <Typography variant='h4' style={{ marginTop: '12px', fontWeight: 'bolder' }}>
-                            £241,329
+                            Mock app homepage
                         </Typography>
 
-                        <Box
-                            sx={{
-                                width: '25px',
-                                height: '25px',
-                                borderRadius: '50%',
-                                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-                                backgroundColor: 'white',
-                                marginTop: '24px',
-                                display: 'flex',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                padding: '12px'  // Add padding here to shrink the image inside the circle
-                            }}
-                        >
-                            <img
-                                src='./lloyds-logo.svg'
-                                alt="Lloyds logo"
-                                style={{ width: '100%', height: 'auto' }} // Image scales to the padded area
-                            />
-                        </Box>
+
                     </Box>
                 </Box>
             </Box>
@@ -98,77 +67,13 @@ function WidowsAppHome() {
                         flexDirection: 'column'
                     }}
                 >
-                    <Box sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        margin: '24px 12px 12px 24px'
-                    }}>
-                        <SsidChartIcon />
-                        <Typography fontWeight="bold">Projected pension pot</Typography>
-                        <ArrowForwardIosIcon />
-                    </Box>
-                    <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'center' }}>
-                        <Typography fontWeight="bold" fontSize="25px" sx={{ marginLeft: "24px" }}>£85,100</Typography>
-                        <Typography color='grey' marginLeft="12px">from age 67</Typography>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            width: '100%',
-                            margin: '20px 0 20px 0'
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: 'calc(100% - 42px)',
-                                height: '1px',
-                                backgroundColor: 'lightgrey'
-                            }}
-                        />
-                    </Box>
-                    <Typography color='grey' margin="0 24px 0 24px">Heading towards a basic living standard</Typography>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            justifyContent: 'center',
-                            width: '100%',
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                width: 'calc(100% - 42px)'
-                            }}
-                        >
-                            <Slider
-                                disabled
-                                defaultValue={30}
-                                aria-label="Disabled slider"
-                                sx={{
-                                    color: '#133540',  // This changes the track and thumb color
-                                    '& .MuiSlider-thumb': {
-                                        width: 16,
-                                        height: 16,
-                                        backgroundColor: '#133540',
-                                        border: '2px solid #133540',  // Custom border for the thumb
-                                    },
-                                    '& .MuiSlider-rail': {
-                                        backgroundColor: '#ede9ff'  // This changes the background (unfilled part of the track)
-                                    },
-                                    '& .MuiSlider-track': {
-                                        backgroundColor: '#af5eff'  // This changes the filled part of the track
-                                    }
-                                }}
-                            />
-                        </Box>
-                    </Box>
                 </Box>
             </Box>
             <Dialog
                 open={open}
                 onClose={handleClose}
                 TransitionComponent={Slide}
-                TransitionProps={{ direction: 'up' }}  // Slides up from bottom
+                TransitionProps={{ direction: 'up' }}
                 fullWidth
                 maxWidth="sm"
                 sx={{
@@ -217,7 +122,6 @@ function WidowsAppHome() {
                     </Box>
                 </DialogActions>
             </Dialog>
-            <Footer />
         </>
     );
 }
